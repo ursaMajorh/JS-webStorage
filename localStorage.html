@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html charset=utf-8" />
+    <link rel="stylesheet" href="style(storage).css" type="text/css" media="all" />
+    <title>localStorage</title>
+  </head>
+  <body>
+    
+    <h2>Mekanisme <code>localStorage</code></h2>
+    <ul>
+      <li>
+        <p>Mekanisme localStorage tersedia melalui property <code>window.localStorage. window.localStorage</code> merupakan bagian dari interface JavaScript yang berisikan dokumen DOM </p>
+      </li>
+      <li>
+        <p>Interface <code>window</code> menampilkan berbagai function, constructor, object, dan namespace. properti ini adalah read-only yang mengembalikan referensi ke objek penyimpanan lokal yang digunakan untuk menyimpan data yang hanya dapat diakses oleh <code>window.localStorage</code> yang sudah dibuat sebelumnya</p>
+      </li>
+    </ul>
+    
+    <h2>Methods <code>localStorage</code></h2>
+    <p>Ada 5 method yang digunakan untuk menggunakan localStorage</p>
+    <ol>
+      <li>
+        <code>setItem(<i>key, value</i>)</code>
+        <p>Untuk menambahkan/menyimpan key-value ke localStorage</p>
+      </li>
+      <li>
+        <code>getItem(<i>key</i>)</code>
+        <p>Untuk mendapatkan value dari localStorage dan akan mengembalikan string sebagai value-nya</p>
+      </li>
+      <li>
+        <code>removeItem(<i>key</i>)</code>
+        <p>menghapus item dengan menggunakan key dari localStorage</p>
+      </li>
+      <li>
+        <code>clear()</code>
+        <p>menghapus semua dari localStorage</p>
+      </li>
+      <li>
+        <code>key(<i>index key dari localStorage</i>)</code><br/>
+        <p>mengembalikan nama key dengan index yang ditentukan</p>
+      </li>
+    </ol>
+    
+    <h2>Test <code>localStorage</code></h2>
+    <input type="text" placeholder="key..."/>
+    <input type="text" placeholder="value..."/>
+    <button onclick="tampilItem()">Tampilkan item localStorage</button>
+    <button onclick="hapusItem()">hapus item dari localStorage</button>
+    <button onclick="hapusSemua()">hapus semua item dari localStorage</button>
+    <input type="number" placeholder="index key..."/>
+    <button onclick="cariKey()">Cari key dengan index dari localStorage</button>
+    
+    <h2>Menyimpan array dan object</h2>
+    <p>untuk menyimpan array dan objek ke localStorage, sebelumnya harus diubah dulu key-value-nya menjadi <b>JSON String</b> dengan menggunakan method <code>JSON.stringify()</code> sebelum <code>setItem()</code></p>
+    <pre>
+      // buat objek dulu
+      const person = {
+        name : 'Icikiwir',
+        id : 123
+      }
+      
+      // ubah objek jadi string
+      window.localStorage.setItem('user', JSON.stringify(person));
+      
+      // untuk mengubah JSON string menjadi objek
+      const jsonObj = JSON.parse(localStorage.getItem('user'))
+      console.log(jsonObj)
+    </pre>
+    
+    
+    <script type="text/javascript" charset="utf-8">
+    
+      const input = document.querySelectorAll("input");
+
+      // getItem
+      function tampilItem() {
+        let key = input[0].value;
+        let value = input[1].value;
+        
+        //setItem
+        window.localStorage.setItem(key, value);
+        const getItem = window.localStorage.getItem(key);
+        alert(getItem);  
+        
+        return key;
+      }
+      
+      // removeItem
+      function hapusItem() {
+        window.localStorage.removeItem(tampilItem())
+        alert("berhasil menghapus item")
+      }
+      
+      // clearAll
+      function hapusSemua() {
+        window.localStorage.clear()
+        alert("berhasil menghapus semua localStorage")
+      }
+      
+      function cariKey() {
+        let key = localStorage.key(input[2].value)
+        alert(key)
+      }
+      
+      
+      // UNTUK MENYIMPAN ARRAY DAN OBJECT
+      
+      // buat objek dulu
+      const person = {
+        name : 'Icikiwir',
+        id : 123
+      }
+      
+      // ubah objek jadi string
+      window.localStorage.setItem('user', JSON.stringify(person));
+      
+      // untuk mengubah JSON string menjadi objek
+      const jsonObj =  JSON.parse(localStorage.getItem('user'))
+      console.log(jsonObj)
+      
+    </script>
+  </body>
+</html>
